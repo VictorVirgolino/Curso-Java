@@ -13,7 +13,7 @@ package sef.module3.sample.aula1_22_07_2024;
 public class LocalizaNumero {
 	// Corrigir este algoritmo.
 	public static void main(String[] args) {
-		int vetor[] = {1,2,3,4,5,6,7,8,9,10};
+		int[] vetor = {1,2,3,4,5,6,7,8,9,10};
 		int numero = 8;
 		boolean achou = false;
 		int indice = -1;
