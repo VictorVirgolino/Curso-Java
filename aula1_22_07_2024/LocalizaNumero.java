@@ -1,4 +1,3 @@
-package sef.module3.sample.aula1_22_07_2024;
 /*
                    Scanners - Atividade 2 LocalizarNúmero
                     Aluno: Victor Arruda Câmara Virgolino
@@ -7,6 +6,7 @@ package sef.module3.sample.aula1_22_07_2024;
 		Faça um programa para pesquisar o valor 8 no vetor dado:
 		inteiro vetor[] = {1, 3, 5, 8, 9, 10}
  */
+package sef.module3.sample.aula1_22_07_2024;
 
 
 

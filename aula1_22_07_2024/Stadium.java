@@ -1,4 +1,3 @@
-package sef.module3.sample.aula1_22_07_2024;
 /*
                        Scanners - Atividade 1 Stadium
                     Aluno: Victor Arruda Câmara Virgolino
@@ -11,6 +10,7 @@ Um estádio oferece três categorias de assentos:
  Escreva um programa que pergunta quantos bilhetes de cada classe foram vendidos,
  e, em seguida, exibe a reda gerada pela venda dos ingressos.
  */
+package sef.module3.sample.aula1_22_07_2024;
 
 
 import java.util.Scanner;
