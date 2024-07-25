@@ -1,3 +1,11 @@
+/*
+                   Array Manipulation - Atividade 4 Jogo de Xadrez
+                    Aluno: Victor Arruda Câmara Virgolino
+                                  Questão:
+
+		Simule as movimentações de peças de xadrez em um tabuleiro e valide as entradas de dados.
+ */
+
 package sef.module3.sample.aula2_23_07_2024;
 
 public class ChessBoard {

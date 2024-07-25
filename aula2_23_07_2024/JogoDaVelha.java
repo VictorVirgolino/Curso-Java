@@ -1,5 +1,5 @@
 /*
-                   Array Manipulation - Atividade 3 LocalizarNúmero
+                   Array Manipulation - Atividade 3 Jogo da Velha
                     Aluno: Victor Arruda Câmara Virgolino
                                   Questão:
 

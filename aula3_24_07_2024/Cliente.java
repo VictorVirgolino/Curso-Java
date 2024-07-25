@@ -1,5 +1,5 @@
 /*
-                   Classes - Atividade 5 Conta Corrente e Cliente
+                   Classes - Atividade 6 Conta Corrente e Cliente
                     Aluno: Victor Arruda Câmara Virgolino
                                   Questão:
 
