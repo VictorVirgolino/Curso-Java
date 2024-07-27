@@ -16,19 +16,22 @@
 		e um método construtor que inicialize os atributos
  */
 
-package sef.module3.sample.aula3_24_07_2024;
+package sef.module3.sample.aula4_25_07_2024;
+
+import sef.module3.sample.aula3_24_07_2024.ContaCorrente;
+import sef.module3.sample.aula4_25_07_2024.erros.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class ContaCorrenteAtualizada {
+public class ContaCorrenteComException {
     private int numero;
     private Cliente cliente;
     private double saldo;
     private LocalDate data;
 
     //construtor
-    public ContaCorrenteAtualizada(int numero, Cliente cliente, double saldo, LocalDate data){
+    public ContaCorrenteComException(int numero, Cliente cliente, double saldo, LocalDate data){
         this.cliente = cliente;
         this.numero = numero;
         this.saldo = saldo;
@@ -38,28 +41,37 @@ public class ContaCorrenteAtualizada {
      * Método para adicionar um valor ao saldo da conta
      * */
     public double depositar(double valor) throws Exception{
-        if(valor <0){
-            throw new Exception("Deposito não pode ser negativo");
-        }else{
-            this.saldo += valor;
+        try{
+            if(valor < 0){
+                throw new DepositoInvalidoException(valor);
+            }else{
+                this.saldo += valor;
+                return this.saldo;
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
             return this.saldo;
         }
-
     }
     /*
-     * Método para sacar um valor do saldo  da conta
+     * Método para sacar um valor do saldo da conta
      * */
     public double sacar(double valor) throws Exception{
         //checar se tem saldo para sacar
-        if(valor <0){
-            throw new Exception("Saque não pode ser negativo");
-        }else{
-            if(this.saldo < valor){
-                throw new Exception("Saldo insuficiente");
+        try{
+            if(valor < 0){
+                throw new SaqueInvalidoException(valor);
             }else{
-                this.saldo -= valor;
-                return this.saldo;
+                if(this.saldo < valor){
+                    throw new EstouroSaqueException(valor, this.saldo);
+                }else{
+                    this.saldo -= valor;
+                    return this.saldo;
+                }
             }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return  this.saldo;
         }
     }
     /*
@@ -74,20 +86,26 @@ public class ContaCorrenteAtualizada {
         return mensagem;
     }
     /*
-     * Método transferir retira um valor do saldo da conta e transfere para uma outra conta
+     * Método transferir retira um valor do saldo da conta e transfere para outra conta
      * */
-    public double transferir(ContaCorrente destino, double valor) throws Exception{
-        if(valor <0){
-            throw new Exception("Saque não pode ser negativo");
-        }else {
-            if(this.saldo < valor){
-                throw new Exception("Saldo insuficiente");
-            }else{
+    public double transferir(ContaCorrenteComException destino, double valor) throws Exception{
+        try{
+            if(valor <0){
+                throw new TransferenciaInvalidaException(valor);
+            }
+            else if(this.saldo < valor){
+                throw new EstouroTransferenciaException(valor, this.saldo);
+            }
+            else{
                 this.saldo -= valor;
                 destino.depositar(valor);
                 return this.saldo;
             }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return this.saldo;
         }
+
 
     }
 }

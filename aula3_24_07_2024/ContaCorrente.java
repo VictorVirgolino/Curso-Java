@@ -68,7 +68,7 @@ public class ContaCorrente {
     public String exibirExtrato(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dataFormatada = this.data.format(formatter);
-        String mensagem = "O cliente %s, de numero %d, com conta aberta em %s \nPossui saldo no valor de R$%.2f".formatted(this.nome, this.saldo, dataFormatada);
+        String mensagem = "O cliente %s, de numero %d, com conta aberta em %s \nPossui saldo no valor de R$%.2f".formatted(this.nome,this.numero,dataFormatada,this.saldo );
         System.out.println(mensagem);
         return mensagem;
     }
