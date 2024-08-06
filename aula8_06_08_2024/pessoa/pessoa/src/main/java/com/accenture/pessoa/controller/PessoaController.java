@@ -15,57 +15,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.pessoa.model.Pessoa;
-import com.accenture.pessoa.repository.PessoaRepository;
+import com.accenture.pessoa.service.PessoaService;
 
 @RestController
 public class PessoaController {
+
     @Autowired
-    private PessoaRepository _pessoaRepository;
+    private PessoaService pessoaService;
 
     @RequestMapping(value = "/pessoa", method = RequestMethod.GET)
-    public List<Pessoa> Get() {
-        return _pessoaRepository.findAll();
+    public List<Pessoa> get() {
+        return pessoaService.getAllPessoas();
     }
 
     @RequestMapping(value = "/pessoa/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Pessoa> GetById(@PathVariable(value = "id") long id)
-    {
-        Optional<Pessoa> pessoa = _pessoaRepository.findById(id);
-        if(pessoa.isPresent())
-            return new ResponseEntity<Pessoa>(pessoa.get(), HttpStatus.OK);
-        else
+    public ResponseEntity<Pessoa> getById(@PathVariable(value = "id") long id) {
+        Optional<Pessoa> pessoa = pessoaService.getPessoaById(id);
+        if (pessoa.isPresent()) {
+            return new ResponseEntity<>(pessoa.get(), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @RequestMapping(value = "/pessoa", method =  RequestMethod.POST)
-    public Pessoa Post(@Valid @RequestBody Pessoa pessoa)
-    {
-        return _pessoaRepository.save(pessoa);
-    }
-
-    @RequestMapping(value = "/pessoa/{id}", method =  RequestMethod.PUT)
-    public ResponseEntity<Pessoa> Put(@PathVariable(value = "id") long id, @Valid @RequestBody Pessoa newPessoa)
-    {
-        Optional<Pessoa> oldPessoa = _pessoaRepository.findById(id);
-        if(oldPessoa.isPresent()){
-            Pessoa pessoa = oldPessoa.get();
-            pessoa.setNome(newPessoa.getNome());
-            _pessoaRepository.save(pessoa);
-            return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
         }
-        else
+    }
+
+    @RequestMapping(value = "/pessoa", method = RequestMethod.POST)
+    public Pessoa post(@Valid @RequestBody Pessoa pessoa) {
+        return pessoaService.savePessoa(pessoa);
+    }
+
+    @RequestMapping(value = "/pessoa/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Pessoa> put(@PathVariable(value = "id") long id, @Valid @RequestBody Pessoa newPessoa) {
+        Optional<Pessoa> updatedPessoa = pessoaService.updatePessoa(id, newPessoa);
+        if (updatedPessoa.isPresent()) {
+            return new ResponseEntity<>(updatedPessoa.get(), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/pessoa/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
-    {
-        Optional<Pessoa> pessoa = _pessoaRepository.findById(id);
-        if(pessoa.isPresent()){
-            _pessoaRepository.delete(pessoa.get());
+    public ResponseEntity<Object> delete(@PathVariable(value = "id") long id) {
+        if (pessoaService.deletePessoa(id)) {
             return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
