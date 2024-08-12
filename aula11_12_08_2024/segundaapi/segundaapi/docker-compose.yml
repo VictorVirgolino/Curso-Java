@@ -1,0 +1,16 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: segundaapi_db
+    environment:
+      MYSQL_ROOT_PASSWORD: sa # Defina a senha do usuário root
+      MYSQL_DATABASE: testdb         # Nome do banco de dados que será criado
+      MYSQL_USER: sa                      # Nome do usuário
+      MYSQL_PASSWORD: sa         # Senha do usuário
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql2
+
+volumes:
+  db_data:

@@ -1,12 +1,10 @@
 services:
   db:
-    image: mysql:8.0
-    container_name: segundaapi_db
+    image: mysql
+    container_name: terceiraapi_db
     environment:
-      MYSQL_ROOT_PASSWORD: sa # Defina a senha do usuário root
-      MYSQL_DATABASE: testdb         # Nome do banco de dados que será criado
-      MYSQL_USER: sa                      # Nome do usuário
-      MYSQL_PASSWORD: sa         # Senha do usuário
+      MYSQL_ROOT_PASSWORD: root # Defina a senha do usuário root
+      MYSQL_DATABASE: mydb         # Nome do banco de dados que será criado       # Senha do usuário
     ports:
       - "3306:3306"
     volumes:
